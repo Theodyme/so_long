@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:12 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/07 15:05:21 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/10 16:20:16 by theophane        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,16 @@ int		namechecker(char *av)
 	return (0);
 }
 
+// int		charsetchecker(char **map)
+// {
+
+// }
+
 int		get_map(char *av)
 {
-	// int	map;
-	// ft_printf(0, "the path is: %s\n", av);
 	if (!av)
 		return (1);
 	if (namechecker(av) == 1)
 		return (1);
-	// map = open(av, O_RDONLY, 0777);
 	return (0);
 }

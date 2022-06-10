@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
+#    By: theophane <theophane@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/07 14:42:36 by flplace          ###   ########.fr        #
+#    Updated: 2022/06/10 17:23:57 by theophane        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,12 @@ END_COLOR	:= \033[0;39m
 
 SRCS	=	main.c \
 			parsing.c \
+			mapbuilder.c \
+			print_utilities.c \
 			library/ft_calloc.c \
-			library/ft_strcmp.c
+			library/ft_strcmp.c \
+			gnl/get_next_line.c \
+			gnl/get_next_line_utils.c
 LIB		=	ft_printf/libftprintf.a
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
