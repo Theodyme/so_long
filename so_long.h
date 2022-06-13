@@ -6,7 +6,7 @@
 /*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/10 17:27:12 by theophane        ###   ########.fr       */
+/*   Updated: 2022/06/13 17:51:07 by theophane        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include "gnl/get_next_line.h"
 # include "mlx/mlx.h"
 
+typedef struct s_mlxp
+{
+    void    *mlx;
+    void    *win;
+}				t_mlxp;
+
 /*		error handler				*/
 int		errorprinter(int flag);
 
@@ -25,6 +31,9 @@ int		errorprinter(int flag);
 int		get_map(char *av);
 int		namechecker(char *av);
 // int     charsetchecker(char **map);
+
+/*      game process                */
+void    win_init(void);
 
 /*      map building                */
 char    **map_init(char *file);

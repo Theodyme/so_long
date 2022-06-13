@@ -6,7 +6,7 @@
 #    By: theophane <theophane@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/10 17:23:57 by theophane        ###   ########.fr        #
+#    Updated: 2022/06/13 17:09:30 by theophane        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,13 @@ SRCS	=	main.c \
 			parsing.c \
 			mapbuilder.c \
 			print_utilities.c \
+			game_process.c \
 			library/ft_calloc.c \
 			library/ft_strcmp.c \
 			gnl/get_next_line.c \
 			gnl/get_next_line_utils.c
-LIB		=	ft_printf/libftprintf.a
+LIB		=	ft_printf/libftprintf.a \
+			mlx/libmlx.a
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
 CC		=	gcc
@@ -44,7 +46,8 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 $(NAME):	${OBJ}
 	@make --no-print-directory -C ft_printf
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB)
+	@make --no-print-directory -C mlx
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) -lXext -lX11
 	@echo "$(GREEN)Compiled $(NAME) :)$(END_COLOR)"
 
 all:	${NAME}
@@ -55,6 +58,7 @@ clean:
 
 fclean: clean
 	@make fclean --no-print-directory -C ft_printf
+	@make clean --no-print-directory -C mlx
 	@rm -f ${NAME}
 	@echo "$(YELLOW)Cleaned libraries and $(NAME) executable.$(END_COLOR)"
 
