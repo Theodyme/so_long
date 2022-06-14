@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/13 17:51:07 by theophane        ###   ########.fr       */
+/*   Updated: 2022/06/14 15:37:18 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,33 @@ typedef struct s_mlxp
     void    *win;
 }				t_mlxp;
 
+typedef struct s_map
+{
+    char	**map;
+    int		y;
+	int		x;
+}				t_map;
+
 /*		error handler				*/
 int		errorprinter(int flag);
 
 /*		parsing						*/
-int		get_map(char *av);
-int		namechecker(char *av);
-// int     charsetchecker(char **map);
+int		char_count(char **map, char c);
+int		char_count_line(char *line, char c);
+int		charsetchecker(char **map);
+int		format_checker(t_map lvl);
+int		get_map(char *filename);
+int		is_charset(char *charset, char b);
+int		is_directory(char *filename);
+int		name_checker(char *filename);
+int		wall_checking(t_map lvl);
 
 /*      game process                */
 void    win_init(void);
 
 /*      map building                */
 char    **map_init(char *file);
+char	**map_builder(char *file, char **map);
 int     y_count(char *file);
 
 /*		utils						*/

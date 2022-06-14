@@ -10,5 +10,6 @@ void    mapprinter(char **map)
         ft_printf(1, "%s", map[i]);
         i++;
     }
+	ft_printf(1, "\n");
     return ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/13 17:58:43 by theophane        ###   ########.fr       */
+/*   Updated: 2022/06/14 16:00:38 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,38 @@
 
 int	errorprinter(int flag)
 {
-	if (flag == 1)
-		ft_printf(2, "error: no env variable.");
-	else if (flag == 2)
-		ft_printf(2, "error: map file incorrect.");
+	if (flag == 2)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mmap file incorrect.\e[22;91m\n");
+	else if (flag == 3)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mfile is a directory.\e[22;91m\n");
+	else if (flag == 4)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mexit missing.\e[22;91m\n");
+	else if (flag == 5)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mitem missing.\e[22;91m\n");
+	else if (flag == 6)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mstarting point missing.\e[22;91m\n");
+	else if (flag == 7)
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mwalls missing.\e[22;91m\n");
 	return (1);
 }
 
 int	main(int ac, char **av, char **env)
 {
-	char **map;
-	int fd;
-	int i;
+	t_map	lvl;
 
-	map = NULL;
-	i = 0;
+	lvl.map = NULL;
+	lvl.y = y_count(av[1]);
 	(void)ac;
 	if (!env)
 		return (errorprinter(1));
-	if (get_map(av[1]) == 1)
-		return (errorprinter(2));
-	map = map_init(av[1]);
-	fd = open(av[1], O_RDONLY);
-	map[i] = get_next_line(fd);
-	while (map[i] != NULL)
-	{
-		i++;
-		map[i] = get_next_line(fd);
-	}
-	close(fd);
-	mapprinter(map);
-	win_init();
+	if (get_map(av[1]) != 0)
+		return (errorprinter(get_map(av[1])));
+	lvl.map = map_init(av[1]);
+	lvl.x = ft_strlen(lvl.map[0]) - 1;
+	if (lvl.map == NULL || format_checker(lvl))
+		return (1);
+	mapprinter(lvl.map);
+	// win_init();
 	return (0);
 }
 
@@ -55,7 +56,7 @@ int	main(int ac, char **av, char **env)
 		- no unauthorized function
 		- makefile in your library (would be really awesome if you find out how to
 			compile your gnl, ft_printf, lib utilities and mlx at once. I mean throw
-			everything in a directory and make 'em all together please, just google 
+			everything in a directory and make 'em all together please, just google
 			to know if it's optimal to use plural makefiles before you do)
 		- pass the norminette before pushing
 		- check for duplicated functions in your header file, it happened before
@@ -76,12 +77,12 @@ int	main(int ac, char **av, char **env)
 		3) read line by line with gnl and store them in a char **map
 		4) check the map format (strlen may be useful)
 
-    PARSING properly speaking 
+    PARSING properly speaking
         x check if env variable exists
         x check if the map file has the correct extension format (.ber)
         x check if argv isn't empty
         o check if the map is empty
-        o check if you can't open the map
+        x check if you can't open the map
         o check if the map is a file or a directory
 
 

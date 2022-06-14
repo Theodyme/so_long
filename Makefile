@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theophane <theophane@student.42.fr>        +#+  +:+       +#+         #
+#    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/13 17:09:30 by theophane        ###   ########.fr        #
+#    Updated: 2022/06/14 15:14:17 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ END_COLOR	:= \033[0;39m
 SRCS	=	main.c \
 			parsing.c \
 			mapbuilder.c \
+			format_utilities.c \
+			parsing_utilities.c \
 			print_utilities.c \
 			game_process.c \
 			library/ft_calloc.c \
