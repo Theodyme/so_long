@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/14 15:37:18 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:06:22 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,19 @@
 # include "gnl/get_next_line.h"
 # include "mlx/mlx.h"
 
-typedef struct s_mlxp
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		end;
+}				t_data;
+
+typedef struct s_mlx
 {
     void    *mlx;
     void    *win;
-}				t_mlxp;
+}				t_mlx;
 
 typedef struct s_map
 {
@@ -46,10 +54,11 @@ int		name_checker(char *filename);
 int		wall_checking(t_map lvl);
 
 /*      game process                */
-void    win_init(void);
+void	pixel_put(t_data *data, int x, int y, int color);
+void    win_init(t_mlx vars);
 
 /*      map building                */
-char    **map_init(char *file);
+t_map   map_init(char *file);
 char	**map_builder(char *file, char **map);
 int     y_count(char *file);
 

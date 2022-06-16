@@ -8,7 +8,7 @@ int y_count(char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
 	{
-		ft_printf(2, "error: couldn't open file.");
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mcouldn't open file.\e[22;91m\n");
         return (-1);
 	}
 	i = 0;
@@ -29,7 +29,6 @@ char	**map_builder(char *file, char **map)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_printf(2, "error: couldn't open file.");
 		return (NULL);
 	}
 	map[i++] = get_next_line(fd);
@@ -42,16 +41,18 @@ char	**map_builder(char *file, char **map)
 	return (map);
 }
 
-char    **map_init(char *file)
+t_map    map_init(char *file)
 {
-    char **map;
-    int y;
+	t_map lvl;
 
-    y = y_count(file);
-    if (y == -1)
-        return (NULL);
-    map = (char **)malloc(sizeof(char *) * (y + 1));
-    map[y] = NULL;
-	map_builder(file, map);
-    return (map);
+    lvl.y = y_count(file);
+    if (lvl.y == -1)
+	{
+		lvl.map = NULL;
+        return (lvl);
+	}
+	lvl.map = (char **)malloc(sizeof(char *) * (lvl.y + 1));
+    lvl.map[lvl.y] = NULL;
+	map_builder(file, lvl.map);
+    return (lvl);
 }

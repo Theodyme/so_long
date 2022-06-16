@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/14 16:00:38 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/16 14:56:55 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,24 @@ int	errorprinter(int flag)
 	return (1);
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
 	t_map	lvl;
+	t_mlx	vars;
+	// void *img;
 
 	lvl.map = NULL;
-	lvl.y = y_count(av[1]);
-	(void)ac;
-	if (!env)
-		return (errorprinter(1));
-	if (get_map(av[1]) != 0)
+	if (ac == 1 || get_map(av[1]) != 0)
 		return (errorprinter(get_map(av[1])));
-	lvl.map = map_init(av[1]);
+	lvl = map_init(av[1]);
+	if (lvl.map == NULL)
+		return (1);
 	lvl.x = ft_strlen(lvl.map[0]) - 1;
-	if (lvl.map == NULL || format_checker(lvl))
+	if (format_checker(lvl))
 		return (1);
 	mapprinter(lvl.map);
-	// win_init();
+	win_init(vars);
+	// img = mlx_new_image(vars.mlx, 500, 500);
 	return (0);
 }
 
@@ -84,9 +85,5 @@ int	main(int ac, char **av, char **env)
         o check if the map is empty
         x check if you can't open the map
         o check if the map is a file or a directory
-
-
-
-
 
 */
