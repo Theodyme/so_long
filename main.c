@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/16 14:56:55 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/18 17:31:32 by theophane        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	errorprinter(int flag)
+int errorprinter(int flag)
 {
 	if (flag == 2)
 		ft_printf(2, "\e[1;91mError\n> \e[22;91mmap file incorrect.\e[22;91m\n");
@@ -29,10 +29,10 @@ int	errorprinter(int flag)
 	return (1);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_map	lvl;
-	t_mlx	vars;
+	t_map lvl;
+	t_mlx vars;
 	// void *img;
 
 	lvl.map = NULL;
@@ -45,8 +45,7 @@ int	main(int ac, char **av)
 	if (format_checker(lvl))
 		return (1);
 	mapprinter(lvl.map);
-	win_init(vars);
-	// img = mlx_new_image(vars.mlx, 500, 500);
+	win_init(vars, lvl);
 	return (0);
 }
 
@@ -69,7 +68,7 @@ int	main(int ac, char **av)
 			clean
 		- destroy any printing function you don't need at the end.
 
-    BREAKING INTO STEPS:
+	BREAKING INTO STEPS:
 	to read the map, we may need:
 		1) open() the file
 		2) maybe you need to alloc the map first. if that's the case, you should maybe
@@ -77,13 +76,14 @@ int	main(int ac, char **av)
 			lines themselves on its own.
 		3) read line by line with gnl and store them in a char **map
 		4) check the map format (strlen may be useful)
+		5) !!! if there is two starting point ???
 
-    PARSING properly speaking
-        x check if env variable exists
-        x check if the map file has the correct extension format (.ber)
-        x check if argv isn't empty
-        o check if the map is empty
-        x check if you can't open the map
-        o check if the map is a file or a directory
+	PARSING properly speaking
+		x check if env variable exists
+		x check if the map file has the correct extension format (.ber)
+		x check if argv isn't empty
+		o check if the map is empty
+		x check if you can't open the map
+		o check if the map is a file or a directory
 
 */
