@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/18 17:31:29 by theophane        ###   ########.fr       */
+/*   Updated: 2022/06/21 16:12:12 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <X11/keysymdef.h>
+# include <X11/keysym.h>
 # include <X11/X.h>
 # include "ft_printf/srcs/ft_printf.h"
 # include "gnl/get_next_line.h"
@@ -29,18 +30,20 @@ typedef struct	s_data {
 }				t_data;
 
 typedef struct	s_assets {
-	t_data	chara;
-	t_data	wall;
-	t_data	bg;
-	t_data	exit;
-	t_data	item;
-	t_data	start;
+	t_data	*chara;
+	t_data	*wall;
+	t_data	*bg;
+	t_data	*exit;
+	t_data	*item;
+	t_data	*start;
 }				t_assets;
 
 typedef struct s_mlx
 {
-    void    *mlx;
-    void    *win;
+    void    	*mlx;
+    void    	*win;
+	int			cnt;
+	t_assets	*assets;
 }				t_mlx;
 
 typedef struct s_map
@@ -50,8 +53,9 @@ typedef struct s_map
 	int		x;
 }				t_map;
 
-/*		error handler				*/
+/*		error handler&destroyer		*/
 int			errorprinter(int flag);
+int			free_map(char **map);
 
 /*		parsing						*/
 int			char_count(char **map, char c);
@@ -67,15 +71,19 @@ int			is_charset(char *charset, char b);
 int			is_directory(char *filename);
 
 /*		game utilities				*/
-int			destroy_win(t_mlx vars);
-void    	win_init(t_mlx vars, t_map lvl);
+int			destroy_win(t_mlx *vars);
+int			handle_no_event(void *vars);
+int 		key_hook(int keycode, t_mlx *vars);
+int		   	win_init(t_mlx vars, t_map lvl);
 
 /*      worldbuilding process		*/
-t_assets	assets_init(t_mlx vars);
-t_data		data_init(t_mlx vars, char *path);
-void    	line_building(t_mlx vars, char *line, t_assets assets, int posy);
-void    	lvl_building(t_mlx vars, t_map lvl, t_assets assets);
-void		lvl_init(t_mlx vars, t_map lvl);
+int			start_assets(t_assets *assets);
+int			alloc_assets(t_assets *assets);
+void		assets_init(t_mlx *vars, t_assets *assets);
+t_data		*data_init(t_mlx *vars, char *path);
+void    	line_building(t_mlx *vars, char *line, int posy);
+void    	lvl_building(t_mlx *vars, t_map lvl);
+t_assets   	*lvl_init(t_mlx vars, t_map lvl);
 void		pixel_put(t_data *data, int x, int y, int color);
 
 /*      **map building              */

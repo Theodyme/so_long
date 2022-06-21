@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theophane <theophane@student.42.fr>        +#+  +:+       +#+         #
+#    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/18 15:57:18 by theophane        ###   ########.fr        #
+#    Updated: 2022/06/20 17:05:19 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ SRCS	=	main.c \
 			parsing.c \
 			mapbuilder.c \
 			format_utilities.c \
+			mem_utilities.c \
 			parsing_utilities.c \
 			print_utilities.c \
+			mlx_utilities.c \
 			game_process.c \
 			lvl_building.c \
 			library/ft_calloc.c \

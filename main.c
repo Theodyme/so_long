@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theophane <theophane@student.42.fr>        +#+  +:+       +#+        */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/18 17:31:32 by theophane        ###   ########.fr       */
+/*   Updated: 2022/06/20 17:09:49 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(int ac, char **av)
 		return (1);
 	mapprinter(lvl.map);
 	win_init(vars, lvl);
+	free_map(lvl.map);
 	return (0);
 }
 
