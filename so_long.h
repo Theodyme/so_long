@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/21 16:12:12 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/24 01:04:57 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ typedef struct	s_assets {
 	t_data	*start;
 }				t_assets;
 
-typedef struct s_mlx
-{
-    void    	*mlx;
-    void    	*win;
-	int			cnt;
-	t_assets	*assets;
-}				t_mlx;
-
 typedef struct s_map
 {
     char	**map;
@@ -53,9 +45,24 @@ typedef struct s_map
 	int		x;
 }				t_map;
 
+typedef struct s_mlx
+{
+    void    	*mlx;
+    void    	*win;
+	t_map		*lvl;
+	int			ppos_y;
+	int			ppos_x;
+	int			items;
+	int			mv;
+	t_assets	*assets;
+}				t_mlx;
+
 /*		error handler&destroyer		*/
 int			errorprinter(int flag);
 int			free_map(char **map);
+int			free_global(t_mlx *vars);
+int			free_assets(t_assets *assets);
+int			free_data(t_data *data);
 
 /*		parsing						*/
 int			char_count(char **map, char c);
@@ -74,7 +81,15 @@ int			is_directory(char *filename);
 int			destroy_win(t_mlx *vars);
 int			handle_no_event(void *vars);
 int 		key_hook(int keycode, t_mlx *vars);
-int		   	win_init(t_mlx vars, t_map lvl);
+int		   	win_init(t_mlx vars);
+
+/*		moves utilities				*/
+void	success_exit(t_mlx *vars);
+void	replace_asset(t_mlx *vars);
+int			move_up(t_mlx *vars);
+int			move_down(t_mlx *vars);
+int			move_left(t_mlx *vars);
+int			move_right(t_mlx *vars);
 
 /*      worldbuilding process		*/
 int			start_assets(t_assets *assets);
@@ -82,12 +97,12 @@ int			alloc_assets(t_assets *assets);
 void		assets_init(t_mlx *vars, t_assets *assets);
 t_data		*data_init(t_mlx *vars, char *path);
 void    	line_building(t_mlx *vars, char *line, int posy);
-void    	lvl_building(t_mlx *vars, t_map lvl);
-t_assets   	*lvl_init(t_mlx vars, t_map lvl);
-void		pixel_put(t_data *data, int x, int y, int color);
+void    	lvl_building(t_mlx *vars);
+t_assets   	*lvl_init(t_mlx vars);
+// void		pixel_put(t_data *data, int x, int y, int color);
 
 /*      **map building              */
-t_map   	map_init(char *file);
+t_map   	*map_init(char *file);
 char		**map_builder(char *file, char **map);
 int     	y_count(char *file);
 
@@ -95,6 +110,8 @@ int     	y_count(char *file);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memset(void *b, int c, size_t len);
 int			ft_strcmp(const char *s1, const char *s2);
+char		*ft_itoa(int nb);
+int			ft_power(long nb);
 
 /*      those needs to go           */
 void    	mapprinter(char **map);

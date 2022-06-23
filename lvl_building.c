@@ -16,9 +16,14 @@ void    line_building(t_mlx *vars, char *line, int posy)
         else if (line[i] == 'E')
             mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->exit->img, posx, posy);
         else if (line[i] == 'C')
+		{
+			vars->items += 1;
             mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->item->img, posx, posy);
-        else if (line[i] == 'P')
+		}
+		else if (line[i] == 'P')
         {
+			vars->ppos_x = i;
+			vars->ppos_y = posy / 20;
             mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->start->img, posx, posy);
             mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->chara->img, posx, posy);
         }
@@ -27,14 +32,15 @@ void    line_building(t_mlx *vars, char *line, int posy)
     }
 }
 
-void    lvl_building(t_mlx *vars, t_map lvl)
+void    lvl_building(t_mlx *vars)
 {
     int i;
 
     i = 0;
-    while(lvl.map[i])
+	vars->items = 0;
+    while(vars->lvl->map[i])
     {
-        line_building(vars, &lvl.map[i][0], (i * 20));
+        line_building(vars, &vars->lvl->map[i][0], (i * 20));
         i++;
     }
 }

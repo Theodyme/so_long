@@ -6,7 +6,7 @@
 #    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/20 17:05:19 by flplace          ###   ########.fr        #
+#    Updated: 2022/06/24 00:09:27 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,12 @@ SRCS	=	main.c \
 			parsing_utilities.c \
 			print_utilities.c \
 			mlx_utilities.c \
+			moves_utilities.c \
 			game_process.c \
 			lvl_building.c \
 			library/ft_calloc.c \
 			library/ft_strcmp.c \
+			library/ft_itoa.c \
 			gnl/get_next_line.c \
 			gnl/get_next_line_utils.c
 LIB		=	ft_printf/libftprintf.a \

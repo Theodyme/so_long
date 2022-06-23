@@ -41,18 +41,19 @@ char	**map_builder(char *file, char **map)
 	return (map);
 }
 
-t_map    map_init(char *file)
+t_map    *map_init(char *file)
 {
-	t_map lvl;
+	t_map *lvl;
 
-    lvl.y = y_count(file);
-    if (lvl.y == -1)
+	lvl = malloc(sizeof(t_map));
+    lvl->y = y_count(file);
+    if (lvl->y == -1)
 	{
-		lvl.map = NULL;
+		lvl->map = NULL;
         return (lvl);
 	}
-	lvl.map = (char **)malloc(sizeof(char *) * (lvl.y + 1));
-    lvl.map[lvl.y] = NULL;
-	map_builder(file, lvl.map);
+	lvl->map = (char **)malloc(sizeof(char *) * (lvl->y + 1));
+    lvl->map[lvl->y] = NULL;
+	map_builder(file, lvl->map);
     return (lvl);
 }

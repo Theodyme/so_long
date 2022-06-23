@@ -1,12 +1,17 @@
 #include "so_long.h"
 
-void	pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+// void	success_exit(t_mlx vars)
+// {
+// 		mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->exit->img, (vars->ppos_x * 20), (vars->ppos_y * 20));
+// }
 
-	dst = data->addr + (y * data->ll + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
+// void	pixel_put(t_data *data, int x, int y, int color)
+// {
+// 	char	*dst;
+
+// 	dst = data->addr + (y * data->ll + x * (data->bpp / 8));
+// 	*(unsigned int*)dst = color;
+// }
 
 t_data	*data_init(t_mlx *vars, char *path)
 {
@@ -31,7 +36,7 @@ void	assets_init(t_mlx *vars, t_assets *assets)
 	assets->start = data_init(vars, "./start.xpm");
 }
 
-t_assets    *lvl_init(t_mlx vars, t_map lvl)
+t_assets    *lvl_init(t_mlx vars)
 {
 	t_assets *assets;
 
@@ -39,29 +44,26 @@ t_assets    *lvl_init(t_mlx vars, t_map lvl)
 	start_assets(assets);
 	alloc_assets(assets);
 	assets_init(&vars, assets);
-	ft_printf(1, "chara = %p\n", assets->chara->addr);
-	(void)lvl;
-	// lvl_building(&vars, lvl);
-	// mlx_put_image_to_window(vars.mlx, vars.win, assets.wall.img, 0, 0);
 	return (assets);
 }
 
-int    win_init(t_mlx vars, t_map lvl)
+int    win_init(t_mlx vars)
 {
+	vars.mv = 0;
     vars.mlx = mlx_init();
-	// (void)lvl;
 	if (vars.mlx == NULL)
 		return (1);
-	vars.win = mlx_new_window(vars.mlx, (20 * lvl.x), (20 * lvl.y), "so_long");
-	// vars.assets = assets_init(vars);
-	vars.assets = lvl_init(vars, lvl);
-	lvl_building(&vars, lvl);
-	ft_printf(1, "assets = %p\n", vars.assets->chara->img);
-	// mlx_key_hook(vars.win, key_hook, &vars);
-	// mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
+	vars.win = mlx_new_window(vars.mlx, (20 * vars.lvl->x), (20 * (vars.lvl->y) + 15), "so_long");
+	vars.assets = lvl_init(vars);
+	vars.items = 0;
+	lvl_building(&vars);
+	ft_printf(1, "powerof = %d\n", ft_power(vars.mv));
+	mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
 	mlx_hook(vars.win, KeyPress, KeyPressMask, &key_hook, &vars);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.assets->bg->img, (17 * vars.lvl->x), (20 * (vars.lvl->y)));
+	mlx_string_put(vars.mlx, vars.win, (17 * vars.lvl->x), (20 * (vars.lvl->y) + 10), 0xFFFFFFFF, ft_itoa(vars.mv));
     mlx_loop(vars.mlx);
 	mlx_destroy_window(vars.mlx, vars.win);
-	free(vars.mlx);
+	free_global(&vars);
     return (0);
 }

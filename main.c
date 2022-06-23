@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/20 17:09:49 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/23 22:25:02 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,20 @@ int errorprinter(int flag)
 
 int main(int ac, char **av)
 {
-	t_map lvl;
 	t_mlx vars;
 	// void *img;
 
-	lvl.map = NULL;
 	if (ac == 1 || get_map(av[1]) != 0)
 		return (errorprinter(get_map(av[1])));
-	lvl = map_init(av[1]);
-	if (lvl.map == NULL)
+	vars.lvl = map_init(av[1]);
+	if (vars.lvl->map == NULL)
 		return (1);
-	lvl.x = ft_strlen(lvl.map[0]) - 1;
-	if (format_checker(lvl))
+	vars.lvl->x = ft_strlen(vars.lvl->map[0]) - 1;
+	if (format_checker(*vars.lvl))
 		return (1);
-	mapprinter(lvl.map);
-	win_init(vars, lvl);
-	free_map(lvl.map);
+	mapprinter(vars.lvl->map);
+	win_init(vars);
+	free_map(vars.lvl->map);
 	return (0);
 }
 
