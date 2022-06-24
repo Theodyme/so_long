@@ -5,6 +5,8 @@ int		ft_power(long nb)
 	int		len;
 
 	len = 0;
+	if (nb == 0)
+		return (1);
 	if (nb < 0)
 	{
 		nb = nb * -1;

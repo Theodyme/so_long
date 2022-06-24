@@ -6,7 +6,7 @@
 #    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/24 00:09:27 by flplace          ###   ########.fr        #
+#    Updated: 2022/06/24 18:40:20 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,17 +41,17 @@ LIB		=	ft_printf/libftprintf.a \
 			mlx/libmlx.a
 OBJ		=	${SRCS:.c=.o}
 NAME	=	so_long
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 
 # **************************************************************************** #
 # RULES
 
 %.o:	%.c
-	@${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c -g $< -o $@
 	@echo "$(BLUE)Compiling $<...$(END_COLOR)"
 
-$(NAME):	${OBJ}
+$(NAME):	${OBJ} Makefile
 	@make --no-print-directory -C ft_printf
 	@make --no-print-directory -C mlx
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIB) -lXext -lX11
