@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:14 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/25 16:13:05 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 17:49:16 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int			name_checker(char *filename);
 int			wall_checking(t_map lvl);
 
 /*		parsing utilities			*/
+int			env_check(char **env);
 int			char_count_line(char *line, char c);
 int			is_charset(char *charset, char b);
 int			is_directory(char *filename);
@@ -108,7 +109,6 @@ void		data_init(t_data *data, char *path, void *mlx);
 void		line_building(t_mlx *vars, char *line, int posy);
 void		lvl_building(t_mlx *vars);
 void		lvl_init(t_mlx *vars);
-// void		pixel_put(t_data *data, int x, int y, int color);
 
 /*      **map building              */
 t_map		*map_init(char *file);
@@ -117,10 +117,8 @@ int			y_count(char *file);
 
 /*		utils						*/
 int			ft_strcmp(const char *s1, const char *s2);
+int			ft_strncmp(const char *s1, const char *s2, int n);
 char		*ft_itoa(int nb);
 int			ft_power(long nb);
-
-/*      those needs to go           */
-void		mapprinter(char **map);
 
 #endif

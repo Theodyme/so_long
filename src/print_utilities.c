@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:22:46 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/25 15:52:54 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 17:40:27 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,4 @@ void	replace_asset(t_mlx *vars)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->bg->img,
 			(vars->ppos_x * TILESIZE), (vars->ppos_y * TILESIZE));
 	}
-}
-
-void	mapprinter(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf(1, "%s", map[i]);
-		i++;
-	}
-	ft_printf(1, "\n");
-	return ;
 }

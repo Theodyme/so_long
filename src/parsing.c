@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:12 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/25 15:51:57 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 17:16:34 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	format_checker(t_map lvl)
 		return (1);
 	if (char_count(lvl.map, 'E') < 1)
 		return (errorprinter(4));
+	if (char_count(lvl.map, 'P') != 1)
+		return (errorprinter(8));
 	if (char_count(lvl.map, 'C') < 1)
 		return (errorprinter(5));
 	if (char_count(lvl.map, 'P') < 1)

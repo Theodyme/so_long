@@ -6,7 +6,7 @@
 #    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/25 16:13:24 by flplace          ###   ########.fr        #
+#    Updated: 2022/06/25 17:40:37 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS	=	src/main.c \
 			src/game_process.c \
 			src/lvl_building.c \
 			library/ft_strcmp.c \
+			library/ft_strncmp.c \
 			library/ft_itoa.c \
 			gnl/get_next_line.c \
 			gnl/get_next_line_utils.c

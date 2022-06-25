@@ -6,7 +6,7 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 15:22:33 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/25 16:41:31 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 17:07:05 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**map_builder(char *file, char **map)
 
 t_map	*map_init(char *file)
 {
-	t_map *lvl;
+	t_map	*lvl;
 
 	lvl = malloc(sizeof(t_map));
 	lvl->y = y_count(file);
