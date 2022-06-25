@@ -6,13 +6,13 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:18 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/24 19:16:52 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 16:42:53 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
-int errorprinter(int flag)
+int	errorprinter(int flag)
 {
 	if (flag == 2)
 		ft_printf(2, "\e[1;91mError\n> \e[22;91mmap file incorrect.\e[22;91m\n");
@@ -25,34 +25,32 @@ int errorprinter(int flag)
 	else if (flag == 6)
 		ft_printf(2, "\e[1;91mError\n> \e[22;91mstarting point missing.\e[22;91m\n");
 	else if (flag == 7)
-		ft_printf(2, "\e[1;91mError\n> \e[22;91mwalls missing.\e[22;91m\n");
+		ft_printf(2, "\e[1;91mError\n> \e[22;91mmap doesn't start with correct walls.\e[22;91m\n");
 	return (1);
 }
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	t_mlx vars;
+	t_mlx	vars;
 
 	if (!env)
 		return (0);
 	if (ac == 1 || get_map(av[1]) != 0)
 		return (errorprinter(get_map(av[1])));
 	vars.lvl = map_init(av[1]);
-	if (vars.lvl->map == NULL || vars.lvl == NULL)
+	if (vars.lvl->map == NULL || vars.lvl == NULL || !(vars.lvl->y))
 	{
 		free_map(vars.lvl->map);
+		free(vars.lvl);
 		return (1);
 	}
 	vars.lvl->x = ft_strlen(vars.lvl->map[0]) - 1;
 	if (format_checker(*vars.lvl))
 	{
-		mapprinter(vars.lvl->map);
 		free_map(vars.lvl->map);
 		free(vars.lvl);
-		// free_map(vars.lvl->map);
 		return (1);
 	}
-	// mapprinter(vars.lvl->map);
 	win_init(&vars);
 	free_global(&vars, 0);
 	return (0);

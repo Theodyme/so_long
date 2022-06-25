@@ -1,59 +1,79 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_process.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 15:22:06 by flplace           #+#    #+#             */
+/*   Updated: 2022/06/25 15:26:08 by flplace          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// void	success_exit(t_mlx vars)
-// {
-// 		mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->exit->img, (vars->ppos_x * 20), (vars->ppos_y * 20));
-// }
+#include "../include/so_long.h"
 
-void data_init(t_data *data, char *path, void *mlx)
+void	data_init(t_data *data, char *path, void *mlx)
 {
-	int size;
+	int	size;
 
 	size = 20;
 	data->img = mlx_xpm_file_to_image(mlx, path, &size, &size);
 }
 
-// VERIFIER SI LES ASSETS SONT OUVRABLE ET LE PROTEGER
-
-void	assets_init(t_mlx *vars)
+int	assets_init(t_mlx *vars)
 {
-	data_init(vars->assets->chara, "./character.xpm", vars->mlx);
-	data_init(vars->assets->wall, "./wall.xpm", vars->mlx);
-	data_init(vars->assets->bg, "./bg.xpm", vars->mlx);
-	data_init(vars->assets->exit, "./exit.xpm", vars->mlx);
-	data_init(vars->assets->item, "./item.xpm", vars->mlx);
-	data_init(vars->assets->start, "./start.xpm", vars->mlx);
+	data_init(vars->assets->chara, CHARA, vars->mlx);
+	data_init(vars->assets->wall, WALL, vars->mlx);
+	data_init(vars->assets->bg, BG, vars->mlx);
+	data_init(vars->assets->exit, EXIT, vars->mlx);
+	data_init(vars->assets->item, ITEM, vars->mlx);
+	data_init(vars->assets->start, START, vars->mlx);
+	data_init(vars->assets->black, BLACK, vars->mlx);
+	if (vars->assets->chara->img != NULL && vars->assets->wall->img != NULL
+		&& vars->assets->bg->img != NULL && vars->assets->exit->img != NULL
+		&& vars->assets->item->img != NULL && vars->assets->start->img != NULL
+		&& vars->assets->black->img != NULL)
+		return (0);
+	return (1);
 }
 
-void    lvl_init(t_mlx *vars)
+void	lvl_init(t_mlx *vars)
 {
 	vars->assets = malloc(sizeof(t_assets));
 	start_assets(vars->assets);
-	alloc_assets(vars->assets);
-	assets_init(vars);
+	if (alloc_assets(vars->assets) == 1)
+		exit(free_global(vars, 1));
+	if (assets_init(vars) == 1)
+		exit(free_global(vars, 1));
 }
 
-int    win_init(t_mlx *vars)
+int	game_launcher(t_mlx *vars)
 {
-	// char * count;
-
-	vars->mv = 0;
-	// count = ft_itoa(vars->mv);
-	// ft_strlen(count);
-    vars->mlx = mlx_init();
-	if (vars->mlx == NULL)
-		return (1);
-	vars->win = mlx_new_window(vars->mlx, (SIZE * vars->lvl->x), (SIZE * (vars->lvl->y) + 15), "so_long");
-	lvl_init(vars);
-	vars->items = 0;
-	lvl_building(vars);
 	mlx_loop_hook(vars->mlx, &handle_no_event, vars);
 	mlx_hook(vars->win, KeyPress, KeyPressMask, &key_hook, vars);
 	mlx_hook(vars->win, 17, 1L << 5, destroy_win, vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->bg->img, (17 * vars->lvl->x), (SIZE * (vars->lvl->y)));
-	mlx_string_put(vars->mlx, vars->win, (17 * vars->lvl->x), (SIZE * (vars->lvl->y) + 10), 0xFFFFFFFF, ft_itoa(vars->mv));
-	// free(count);
-    mlx_loop(vars->mlx);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->assets->black->img,
+		(17 * vars->lvl->x), (TILESIZE * (vars->lvl->y)));
+	mlx_string_put(vars->mlx, vars->win, (17 * vars->lvl->x),
+		(TILESIZE * (vars->lvl->y) + 10), 0xFFFFFFFF, "0");
+	mlx_loop(vars->mlx);
+	return (0);
+}
+
+int	win_init(t_mlx *vars)
+{
+	vars->mv = 0;
+	vars->mlx = mlx_init();
+	if (vars->mlx == NULL)
+		return (1);
+	vars->win = mlx_new_window(vars->mlx, (TILESIZE * vars->lvl->x),
+			(TILESIZE * (vars->lvl->y) + 15), "so_long");
+	if (vars->win == NULL)
+		return (1);
+	lvl_init(vars);
+	vars->items = 0;
+	lvl_building(vars);
+	game_launcher(vars);
 	free_global(vars, 1);
-    return (0);
+	return (0);
 }

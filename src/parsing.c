@@ -6,15 +6,15 @@
 /*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:55:12 by flplace           #+#    #+#             */
-/*   Updated: 2022/06/16 14:44:00 by flplace          ###   ########.fr       */
+/*   Updated: 2022/06/25 15:51:57 by flplace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/so_long.h"
 
-int		name_checker(char *filename)
+int	name_checker(char *filename)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(filename) - 4;
 	if (i <= 4)
@@ -24,10 +24,10 @@ int		name_checker(char *filename)
 	return (0);
 }
 
-int		charsetchecker(char **map)
+int	charsetchecker(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -37,7 +37,8 @@ int		charsetchecker(char **map)
 		{
 			if (is_charset("01CEP\n\0", map[i][j]) == 0)
 			{
-				ft_printf(2, "\e[1;91mError\n> \e[22;91mwrong charset in map.\e[22;91m\n");
+				ft_printf(2,
+					"\e[1;91mError\n> \e[22;91mwrong charset in map.\e[22;91m\n");
 				return (1);
 			}
 			j++;
@@ -47,7 +48,7 @@ int		charsetchecker(char **map)
 	return (0);
 }
 
-int		get_map(char *filename)
+int	get_map(char *filename)
 {
 	if (!filename)
 		return (2);
@@ -58,7 +59,7 @@ int		get_map(char *filename)
 	return (0);
 }
 
-int		format_checker(t_map lvl)
+int	format_checker(t_map lvl)
 {
 	if (charsetchecker(lvl.map) == 1)
 		return (1);

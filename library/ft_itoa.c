@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 15:59:18 by flplace           #+#    #+#             */
+/*   Updated: 2022/06/25 16:04:49 by flplace          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-int		ft_power(long nb)
+int	ft_power(long nb)
 {
 	int		len;
 
@@ -22,24 +34,20 @@ int		ft_power(long nb)
 
 char	*ft_itoa(int nb)
 {
-	char *str;
+	char	*str;
 	long	n;
 	int		i;
 
 	n = nb;
 	i = ft_power(n);
-	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	str[i--] = '\0';
 	if (n == 0)
 	{
 		str[0] = 48;
 		return (str);
-	}
-	if (n < 0)
-	{
-		str[0] = '-';
-		n = n * -1;
 	}
 	while (n > 0)
 	{

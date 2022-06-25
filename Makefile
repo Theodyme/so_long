@@ -6,7 +6,7 @@
 #    By: flplace <flplace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/22 12:20:26 by flplace           #+#    #+#              #
-#    Updated: 2022/06/24 18:40:20 by flplace          ###   ########.fr        #
+#    Updated: 2022/06/25 16:13:24 by flplace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,18 +21,16 @@ END_COLOR	:= \033[0;39m
 # **************************************************************************** #
 # VARIABLES
 
-SRCS	=	main.c \
-			parsing.c \
-			mapbuilder.c \
-			format_utilities.c \
-			mem_utilities.c \
-			parsing_utilities.c \
-			print_utilities.c \
-			mlx_utilities.c \
-			moves_utilities.c \
-			game_process.c \
-			lvl_building.c \
-			library/ft_calloc.c \
+SRCS	=	src/main.c \
+			src/parsing.c \
+			src/mapbuilder.c \
+			src/mem_utilities.c \
+			src/parsing_utilities.c \
+			src/print_utilities.c \
+			src/mlx_utilities.c \
+			src/moves_utilities.c \
+			src/game_process.c \
+			src/lvl_building.c \
 			library/ft_strcmp.c \
 			library/ft_itoa.c \
 			gnl/get_next_line.c \

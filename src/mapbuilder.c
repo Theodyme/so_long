@@ -1,32 +1,44 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mapbuilder.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 15:22:33 by flplace           #+#    #+#             */
+/*   Updated: 2022/06/25 16:41:31 by flplace          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int y_count(char *file)
+#include "../include/so_long.h"
+
+int	y_count(char *file)
 {
-    int fd;
-    int i;
-	char *line;
+	int		fd;
+	int		i;
+	char	*line;
 
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 	{
 		ft_printf(2, "\e[1;91mError\n> \e[22;91mcouldn't open file.\e[22;91m\n");
-        return (-1);
+		return (-1);
 	}
 	i = 0;
 	line = get_next_line(fd);
-    while (line != NULL)
+	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
-        i++;
+		i++;
 	}
 	close(fd);
-    return (i);
+	return (i);
 }
 
 char	**map_builder(char *file, char **map)
 {
-	int i;
+	int	i;
 	int	l;
 	int	fd;
 
@@ -40,29 +52,29 @@ char	**map_builder(char *file, char **map)
 	map[i++] = get_next_line(fd);
 	while (l != 0)
 	{
-		map[i++]= get_next_line(fd);
+		map[i++] = get_next_line(fd);
 		l--;
 	}
 	close(fd);
 	return (map);
 }
 
-t_map    *map_init(char *file)
+t_map	*map_init(char *file)
 {
 	t_map *lvl;
 
 	lvl = malloc(sizeof(t_map));
-    lvl->y = y_count(file);
-    if (lvl->y == -1)
+	lvl->y = y_count(file);
+	if (lvl->y == -1)
 	{
 		lvl->map = NULL;
 		free(lvl);
-        return (NULL);
+		exit(1);
 	}
 	lvl->map = (char **)malloc(sizeof(char *) * (lvl->y + 1));
 	if (lvl->map == NULL)
 		return (NULL);
-    lvl->map[lvl->y] = NULL;
+	lvl->map[lvl->y] = NULL;
 	map_builder(file, lvl->map);
-    return (lvl);
+	return (lvl);
 }

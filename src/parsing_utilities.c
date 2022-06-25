@@ -1,8 +1,20 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utilities.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flplace <flplace@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 15:22:42 by flplace           #+#    #+#             */
+/*   Updated: 2022/06/25 15:52:03 by flplace          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int		is_charset(char *charset, char b)
+#include "../include/so_long.h"
+
+int	is_charset(char *charset, char b)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (charset[i])
@@ -13,7 +25,7 @@ int		is_charset(char *charset, char b)
 	return (0);
 }
 
-int		is_directory(char *filename)
+int	is_directory(char *filename)
 {
 	int	fd;
 
@@ -24,10 +36,10 @@ int		is_directory(char *filename)
 	return (1);
 }
 
-int		char_count_line(char *line, char c)
+int	char_count_line(char *line, char c)
 {
-	int i;
-	int cnt;
+	int	i;
+	int	cnt;
 
 	i = 0;
 	cnt = 0;
@@ -40,10 +52,10 @@ int		char_count_line(char *line, char c)
 	return (cnt);
 }
 
-int		char_count(char **map, char c)
+int	char_count(char **map, char c)
 {
-	int i;
-	int cnt;
+	int	i;
+	int	cnt;
 
 	i = 0;
 	cnt = 0;
@@ -55,12 +67,13 @@ int		char_count(char **map, char c)
 	return (cnt);
 }
 
-int		wall_checking(t_map lvl)
+int	wall_checking(t_map lvl)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (char_count_line(lvl.map[0], '1') != lvl.x || char_count_line(lvl.map[lvl.y - 1], '1') != lvl.x)
+	if (char_count_line(lvl.map[0], '1') != lvl.x
+		|| char_count_line(lvl.map[lvl.y - 1], '1') != lvl.x)
 		return (1);
 	while (lvl.map[i])
 	{
